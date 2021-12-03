@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/azizsaad/k8_argo_playground.git
     targetRevision: HEAD
-    path: /
+    path: dev
   
   destination:
     server: https://kubernetes.default.svc
