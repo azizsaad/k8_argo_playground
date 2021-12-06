@@ -1,66 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: mongodb-deployment
 spec:
+  replicas: 2
   selector:
     matchLabels:
-      app: myapp
-  replicas: 2
+      app: mongodb
   template:
     metadata:
       labels:
-        app: myapp
+        app: mongodb
     spec:
       containers:
-      - name: myapp
-        image: nanajanashia/argocd-app:1.2
+      - name: mongodb
+        image: mongo
         ports:
-        - containerPort: 8080
+        - containerPort: 27017
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: myapp-service
+  name: mongodb-service 
 spec:
   selector:
-    app: myapp
+    app: mongodb
   ports:
-  - port: 8080
-    protocol: TCP
-    targetPort: 8080
-
-
-
-
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: mongodb-deployment
-# spec:
-#   replicas: 2
-#   selector:
-#     matchLabels:
-#       app: mongodb
-#   template:
-#     metadata:
-#       labels:
-#         app: mongodb
-#     spec:
-#       containers:
-#       - name: mongodb
-#         image: mongo
-#         ports:
-#         - containerPort: 27017
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: mongodb-service 
-# spec:
-#   selector:
-#     app: mongodb
-#   ports:
-#   - port: 27017
-#   protocol: TCP
-#   targetPort: 27017
+  - port: 27017
+  protocol: TCP
+  targetPort: 27017
